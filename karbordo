@@ -44,6 +44,7 @@ ArexBot('ForwardMessage',[
 ]);
 }
  //========arex==========//
+ $rank = $info['result']['status'];
  $Dev = 311526009;
  @$locklink= file_get_contents("data/$chat_id/locklink.txt");
  //==//
