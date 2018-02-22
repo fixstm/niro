@@ -5,7 +5,7 @@
 
 API_KEY = '527854388:AAHJiX6O_7Xy-1EdHUjUuqM0SCNuh6-UD98'; //توکن ربات
 define('API_KEY',$API_KEY);
-function ArexArexBot($method,$datas=[]){
+function ArexBot($method,$datas=[]){
     $url = "https://api.telegram.org/ArexArexBot".API_KEY."/".$method;
     $ch = curl_init();
     curl_setopt($ch,CURLOPT_URL,$url);
@@ -18,11 +18,126 @@ function ArexArexBot($method,$datas=[]){
         return json_decode($res);
     }
 }
- function sendmessage($chat_id, $text, $model){
- ArexArexBot('sendMessage',[
- 'chat_id'=>$chat_id,
- 'text'=>$text,
- 'parse_mode'=>$mode
- ]);
- }
+ function SendMessage($chat_id, $text){
+ArexBot('sendMessage',[
+'chat_id'=>$chat_id,
+'text'=>$text,
+'parse_mode'=>'MarkDown']);
+}
+function save($filename, $data)
+{
+$file = fopen($filename, 'w');
+fwrite($file, $data);
+fclose($file);
+}
+function sendAction($chat_id, $action){
+ArexBot('sendChataction',[
+'chat_id'=>$chat_id,
+'action'=>$action]);
+}
+function Forward($berekoja,$azchejaei,$kodompayam)
+{
+ArexBot('ForwardMessage',[
+'chat_id'=>$berekoja,
+'from_chat_id'=>$azchejaei,
+'message_id'=>$kodompayam
+]);
+}
+ //========arex==========//
+ $Dev = 311526009;
+ @$locklink= file_get_contents("data/$chat_id/locklink.txt");
+ //==//
+ $update = json_decode(file_get_contents('php://input'));
+$message = $update->message;
+$from_id = $message->from->id;
+mkdir("data/$from_id");
+$chat_id = $message->chat->id;
+mkdir("data/$chat_id");
+mkdir("data/$chat_id/$from_id");
+$message_id = $message->message_id;
+$first_name = $message->from->first_name;
+$last_name = $message->from->last_name;
+$username = $message->from->username;
+mkdir("data/username.txt/$username");
+$textmassage = $message->text;
+$token = "351209778:AAEa4Wru6GwMkOqYc0BeZEyZLtcOKXaiZQs";
+$step= file_get_contents("data/$from_id/file.txt");
+$owners= file_get_contents("data/$chat_id/owner.txt");
+$txtt = file_get_contents('data/users.txt');
+$forward_from_chat = $update->message->forward_from_chat;
+$from_chat_id = $forward_from_chat->id;
+$data = $update->callback_query->data;
+$firstcall = $update->callback_query->message->chat->first_name;
+$usercall = $update->callback_query->message->chat->username;
+$messageid = $update->callback_query->message->message_id;
+$chatid = $update->callback_query->message->chat->id;
+$fm = $update->callback_query->message->from->id;
+$tc = $update->message->chat->type;
+$namegroup = $update->message->chat->title;
+$textpost = file_get_contents("data/$chatid/textpost.txt");
+$linkpost = file_get_contents("data/$chatid/linkpost.txt");
+$namepost = file_get_contents("data/$chatid/namepost.txt");
+$channel = file_get_contents("data/$chatid/channel.txt");
+$newchatmemberid = $update->message->new_chat_member->id;
+$rt = $update->message->reply_to_message;
+$rtid = $update->message->reply_to_message->from->id;
+$tedadmsg = $update->message->message_id;
+$namegroup = $update->message->chat_title;
+//===//
+elseif($textmassage=="!settings" && $from_id == "$owners"){
+if ($tc == 'group' | $tc == 'supergroup'){
+  sendAction($chat_id, 'typing');
+save("data/$from_id/file.txt","none");
+	ArexBot('sendmessage',[
+	'chat_id'=>$chat_id,
+	'text'=>"- تنظیمات ذخیره شده برای این گروه با شناسه ...⚜\n\nID : $chat_id\n\n- درخواست کننده ...💯\n\nId admin : $from_id",
+  'parse_mode'=>'MarkDown',
+	'reply_markup'=>json_encode([
+	'resize_keyboard'=>true,
+	'inline_keyboard'=>[
+ [
+ ['text'=>"قفل لینک 🃏",'callback_data'=>'text'],['text'=>"$locklink",'callback_data'=>'text']
+ ],
+  [
+ ['text'=>"قفل تصویر 🎩",'callback_data'=>'text'],['text'=>"$lockphoto",'callback_data'=>'text']
+ ],
+  [
+ ['text'=>"قفل یوز 🍹",'callback_data'=>'text'],['text'=>"$lockusername",'callback_data'=>'text']
+ ],
+  [
+ ['text'=>" قفل ادیت پیام 💡",'callback_data'=>'text'],['text'=>"$lockedit",'callback_data'=>'text']
+ ],
+  [
+ ['text'=>"قفل اپراتور 🔌",'callback_data'=>'text'],['text'=>"$lockoperator",'callback_data'=>'text']
+ ],
+  [
+ ['text'=>"قفل فوش 🎈",'callback_data'=>'text'],['text'=>"$lockfosh",'callback_data'=>'text']
+ ],
+  [
+ ['text'=>"قفل اشتراک مکان 🎉 ",'callback_data'=>'text'],['text'=>"$locklocation",'callback_data'=>'text']
+ ],
+  [
+ ['text'=>"قفل اشتراک شماره 🔑",'callback_data'=>'text'],['text'=>"$lockcontact",'callback_data'=>'text']
+ ],
+  [
+ ['text'=>"قفل فروارد ⚙",'callback_data'=>'text'],['text'=>"$lockforward",'callback_data'=>'text']
+ ],
+  [
+ ['text'=>"قفل موسیقی 🎤",'callback_data'=>'text'],['text'=>"$lockaudio",'callback_data'=>'text']
+ ],
+  [
+ ['text'=>"قفل صدا 🗣",'callback_data'=>'text'],['text'=>"$lockvoice",'callback_data'=>'text']
+ ],
+  [
+ ['text'=>"قفل استیکر ⚡",'callback_data'=>'text'],['text'=>"$locksticker",'callback_data'=>'text']
+ ],
+  [
+ ['text'=>"قفل بازی در گروه 🕷",'callback_data'=>'text'],['text'=>"$lockgame",'callback_data'=>'text']
+ ],
+	]
+	])
+	]);
+	}}
+    تا دو روز تمام سورس تمام میشود 
+    ارکس
  ?>
