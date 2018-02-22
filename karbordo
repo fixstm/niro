@@ -137,7 +137,34 @@ save("data/$from_id/file.txt","none");
 	]
 	])
 	]);
-	}}
-    تا دو روز تمام سورس تمام میشود 
+	}
+	}
+	if(preg_match('/^(.*)([Hh]ttp|[Hh]ttps|t.me)(.*)|([Hh]ttp|[Hh]ttps|t.me)(.*)|(.*)([Hh]ttp|[Hh]ttps|t.me)|(.*)[Tt]elegram.me(.*)|[Tt]elegram.me(.*)|(.*)[Tt]elegram.me|(.*)[Tt].me(.*)|[Tt].me(.*)|(.*)[Tt].me/',$text) ){    
+preg_match('/^(.*)([Hh]ttp|[Hh]ttps|t.me)(.*)|([Hh]ttp|[Hh]ttps|t.me)(.*)|(.*)([Hh]ttp|[Hh]ttps|t.me)|(.*)[Tt]elegram.me(.*)|[Tt]elegram.me(.*)|(.*)[Tt]elegram.me|(.*)[Tt].me(.*)|[Tt].me(.*)|(.*)[Tt].me/',$text,$match);
+if($rank != "creator" && $rank != "administrator"){
+if($locklink == "✔️" || $lockall == "✔️" ){     
+if($setlink == "del" || $sakht == "off" ){    
+bot('deleteMessage',[
+'chat_id'=>$chat_id,
+'message_id'=>$message->message_id
+  ]);
+}else{
+bot('deleteMessage',[
+'chat_id'=>$chat_id,
+'message_id'=>$message->message_id
+  ]);
+bot('kickChatMember',[
+ 'chat_id'=>$chat_id,
+ 'user_id'=>$update->message->from->id
+  ]);
+sendMessage($chat_id,"user $from_id Deleted because of the send link");
+}
+}
+}
+}
+   /*
+   تا دو روز تمام سورس تمام میشود 
     ارکس
- ?>
+*/
+?>
+ 
